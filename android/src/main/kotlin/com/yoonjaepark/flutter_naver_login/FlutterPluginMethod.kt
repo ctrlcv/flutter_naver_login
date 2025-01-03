@@ -1,13 +1,13 @@
 package com.yoonjaepark.flutter_naver_login
 
 sealed class FlutterPluginMethod(val methodName: String) {
-    data object InitSdk : FlutterPluginMethod("initSdk")
-    data object LogIn : FlutterPluginMethod("logIn")
-    data object LogOut : FlutterPluginMethod("logOut")
-    data object LogOutAndDeleteToken : FlutterPluginMethod("logoutAndDeleteToken")
-    data object GetCurrentAccount : FlutterPluginMethod("getCurrentAccount")
-    data object GetCurrentAccessToken : FlutterPluginMethod("getCurrentAccessToken")
-    data object RefreshAccessTokenWithRefreshToken :
+    object InitSdk : FlutterPluginMethod("initSdk")
+    object LogIn : FlutterPluginMethod("logIn")
+    object LogOut : FlutterPluginMethod("logOut")
+    object LogOutAndDeleteToken : FlutterPluginMethod("logoutAndDeleteToken")
+    object GetCurrentAccount : FlutterPluginMethod("getCurrentAccount")
+    object GetCurrentAccessToken : FlutterPluginMethod("getCurrentAccessToken")
+    object RefreshAccessTokenWithRefreshToken :
         FlutterPluginMethod("refreshAccessTokenWithRefreshToken")
 
     companion object {
