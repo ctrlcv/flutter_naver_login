@@ -183,33 +183,33 @@ class FlutterNaverLoginPlugin : FlutterPlugin, MethodCallHandler, ActivityAware 
     }
 
     override fun onMethodCall(call: MethodCall, result: Result) {
-        when (FlutterPluginMethod.fromMethodName(call.method)) {
-            FlutterPluginMethod.InitSdk -> {
-                @Suppress("UNCHECKED_CAST") val args = call.arguments as Map<String, String?>
-                val clientId = args["clientId"] as String
-                val clientName = args["clientName"] as String
-                val clientSecret = args["clientSecret"] as String
-                this.initSdk(result, clientId, clientName, clientSecret)
-            }
+       when (FlutterPluginMethod.fromMethodName(call.method)) {
+           is FlutterPluginMethod.InitSdk -> {
+               @Suppress("UNCHECKED_CAST") val args = call.arguments as Map<String, String?>
+               val clientId = args["clientId"] as String
+               val clientName = args["clientName"] as String
+               val clientSecret = args["clientSecret"] as String
+               this.initSdk(result, clientId, clientName, clientSecret)
+           }
 
-            FlutterPluginMethod.LogIn -> this.login(result)
-            FlutterPluginMethod.LogOut -> this.logout(result)
-            FlutterPluginMethod.LogOutAndDeleteToken -> this.logoutAndDeleteToken(result)
-            FlutterPluginMethod.GetCurrentAccessToken -> this.getCurrentAccessToken(result)
+           is FlutterPluginMethod.LogIn -> this.login(result)
+           is FlutterPluginMethod.LogOut -> this.logout(result)
+           is FlutterPluginMethod.LogOutAndDeleteToken -> this.logoutAndDeleteToken(result)
+           is FlutterPluginMethod.GetCurrentAccessToken -> this.getCurrentAccessToken(result)
 
-            FlutterPluginMethod.GetCurrentAccount -> {
-                mainScope.launch {
-                    getCurrentAccount(result)
-                }
-            }
+           is FlutterPluginMethod.GetCurrentAccount -> {
+               mainScope.launch {
+                   getCurrentAccount(result)
+               }
+           }
 
-            FlutterPluginMethod.RefreshAccessTokenWithRefreshToken -> this.refreshAccessTokenWithRefreshToken(
-                result
-            )
+           is FlutterPluginMethod.RefreshAccessTokenWithRefreshToken -> this.refreshAccessTokenWithRefreshToken(
+               result
+           )
 
-            else -> result.notImplemented()
-        }
-    }
+           else -> result.notImplemented()
+       }
+   }
 
     private fun initSdk(
         result: Result,
